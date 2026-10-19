@@ -1,0 +1,517 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PC Forge - Ultimate PC Builder</title>
+
+<style>
+:root {
+  --bg: #090d16;
+  --panel: #111827;
+  --panel2: #182236;
+  --accent: #00e5a0;
+  --text: #edf4ff;
+  --muted: #9aa9c0;
+  --border: #28364c;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+}
+header {
+  padding: 22px 6%;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  background: #0c1220;
+}
+.logo { font-size: 24px; font-weight: 900; }
+.logo span { color: var(--accent); }
+header a { color: var(--muted); text-decoration: none; }
+.hero {
+  padding: 65px 6% 45px;
+  background: radial-gradient(ellipse at top right,#153b3c 0%,#111827 40%,#090d16 80%);
+}
+.eyebrow {
+  color: var(--accent);
+  font-weight: bold;
+  letter-spacing: 3px;
+  font-size: 12px;
+}
+h1 { font-size: clamp(36px,6vw,66px); margin: 14px 0; }
+.hero p { color: var(--muted); max-width: 620px; line-height: 1.7; }
+.wrap { padding: 28px 6% 60px; }
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0,1.7fr) minmax(270px,0.8fr);
+  gap: 22px;
+  align-items: start;
+}
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 22px;
+  margin-bottom: 20px;
+}
+h2 { font-size: 20px; margin-top: 0; }
+h3 { font-size: 15px; margin-bottom: 8px; }
+.muted { color: var(--muted); line-height: 1.6; font-size: 13px; }
+.parts {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 14px;
+}
+.part {
+  background: var(--panel2);
+  padding: 15px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.part .emoji { font-size: 28px; }
+label { display: block; font-size: 13px; margin: 12px 0 7px; }
+select, input {
+  width: 100%;
+  background: #0c1422;
+  color: var(--text);
+  border: 1px solid #34445d;
+  border-radius: 8px;
+  padding: 11px;
+  font-size: 13px;
+}
+.price { color: var(--accent); font-weight: bold; margin-top: 10px; }
+button {
+  cursor: pointer;
+  border: 0;
+  padding: 12px 15px;
+  border-radius: 9px;
+  font-weight: bold;
+  background: var(--accent);
+  color: #06130f;
+}
+button.secondary {
+  background: var(--panel2);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+.actions { display: flex; gap: 9px; flex-wrap: wrap; margin-top: 15px; }
+.total {
+  font-size: 32px;
+  color: var(--accent);
+  font-weight: 900;
+  margin: 8px 0;
+  overflow-wrap: anywhere;
+}
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+}
+.summary-row span:last-child { text-align: right; }
+.preview {
+  min-height: 155px;
+  border: 1px dashed #3d5870;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  background: radial-gradient(circle,#183b43,#101827 70%);
+  margin-bottom: 16px;
+  padding: 15px;
+}
+.pc-icon { font-size: 65px; }
+.notice {
+  padding: 12px;
+  background: #172a2b;
+  border: 1px solid #23564a;
+  border-radius: 9px;
+  color: #bafce6;
+  font-size: 12px;
+  line-height: 1.6;
+  margin-top: 14px;
+}
+.warning {
+  padding: 12px;
+  background: #302619;
+  border: 1px solid #79592b;
+  border-radius: 9px;
+  color: #ffdaa0;
+  font-size: 12px;
+  line-height: 1.6;
+  margin-top: 12px;
+}
+footer {
+  padding: 25px 6%;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+}
+@media(max-width:760px) {
+  .layout { grid-template-columns: 1fr; }
+  .parts { grid-template-columns: 1fr; }
+  .hero { padding-top: 40px; }
+}
+</style>
+</head>
+
+<body>
+<header>
+  <div class="logo">PC<span>FORGE</span> ⚡</div>
+  <a href="#builder">BUILD YOUR PC ↓</a>
+</header>
+
+<section class="hero">
+  <div class="eyebrow">YOUR BUILD. YOUR RULES.</div>
+  <h1>Build your dream<br><span style="color:#00e5a0">PC setup.</span></h1>
+  <p>Choose your components, explore your budget and design a gaming PC that fits your needs.</p>
+  <a href="#builder"><button>Start Building →</button></a>
+</section>
+
+<main class="wrap" id="builder">
+  <div class="layout">
+    <section>
+      <div class="panel">
+        <h2>⚙️ Choose your components</h2>
+        <p class="muted">Select a part in each category. Prices are illustrative estimates in Indian rupees, not live shop prices.</p>
+        <div class="parts" id="parts"></div>
+      </div>
+
+      <div class="panel">
+        <h2>🎨 Your setup</h2>
+        <label for="buildName">Build name</label>
+        <input id="buildName" maxlength="60" placeholder="e.g. My Ultimate Gaming PC">
+        <label for="purpose">Main purpose</label>
+        <select id="purpose">
+          <option>Gaming</option>
+          <option>Streaming</option>
+          <option>Editing and Design</option>
+          <option>Office and Study</option>
+          <option>All-round Performance</option>
+        </select>
+        <label for="budget">Your budget (₹)</label>
+        <input id="budget" type="number" min="0" value="100000">
+        <div class="actions">
+          <button onclick="saveBuild()">💾 Save Build</button>
+          <button class="secondary" onclick="exportBuild()">⬇ Export JSON</button>
+          <button class="secondary" onclick="resetBuild()">↻ Reset</button>
+        </div>
+        <p class="muted" id="saveStatus" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <aside>
+      <div class="panel">
+        <h2>🖥️ Build overview</h2>
+        <div class="preview">
+          <div>
+            <div class="pc-icon">🖥️</div>
+            <strong id="previewName">Your Dream PC</strong>
+            <p class="muted" id="previewPurpose">Gaming setup</p>
+          </div>
+        </div>
+        <div class="muted">Estimated component total</div>
+        <div class="total" id="total">₹0</div>
+        <div class="summary-row">
+          <span>Budget</span><span id="budgetText">₹1,00,000</span>
+        </div>
+        <div class="summary-row">
+          <span>Budget remaining</span><span id="remaining">₹0</span>
+        </div>
+        <div class="summary-row">
+          <span>Selected parts</span><span id="partCount">0 / 6</span>
+        </div>
+        <div id="budgetMessage" class="notice">Choose components to calculate your estimate.</div>
+        <div id="compatibility"></div>
+      </div>
+
+      <div class="panel">
+        <h2>📋 Selected parts</h2>
+        <div id="summary"></div>
+      </div>
+
+      <div class="panel">
+        <h2>💾 Saved build</h2>
+        <p class="muted" id="savedBuild">No saved build yet.</p>
+        <div class="actions">
+          <button class="secondary" onclick="loadBuild()">Load Saved</button>
+          <button class="secondary" onclick="deleteSaved()">Delete Saved</button>
+        </div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<footer>
+  PC FORGE · A browser-based PC builder simulator.<br>
+  All prices are sample data. Verify actual prices, socket support, RAM type,
+  motherboard size, PSU capacity and case clearance before purchasing.
+</footer>
+
+<script>
+const catalog = {
+  cpu: {
+    label: "Processor (CPU)", icon: "🧠",
+    items: [
+      {name:"AMD Ryzen 5 5600", price:9500, socket:"AM4"},
+      {name:"AMD Ryzen 5 7600", price:18500, socket:"AM5"},
+      {name:"Intel Core i5-12400F", price:10500, socket:"LGA1700"},
+      {name:"Intel Core i5-14600K", price:26000, socket:"LGA1700"}
+    ]
+  },
+  gpu: {
+    label: "Graphics Card (GPU)", icon: "🎮",
+    items: [
+      {name:"Integrated / No separate GPU",price:0},
+      {name:"NVIDIA RTX 4060",price:28000},
+      {name:"AMD Radeon RX 7600",price:26000},
+      {name:"NVIDIA RTX 4070 SUPER",price:62000}
+    ]
+  },
+  motherboard: {
+    label: "Motherboard", icon: "🔌",
+    items: [
+      {name:"Budget AM4 motherboard",price:6500,socket:"AM4",ram:"DDR4"},
+      {name:"B650 AM5 motherboard",price:14000,socket:"AM5",ram:"DDR5"},
+      {name:"H610 LGA1700 motherboard",price:6500,socket:"LGA1700",ram:"DDR4"},
+      {name:"B760 LGA1700 DDR5 board",price:12500,socket:"LGA1700",ram:"DDR5"}
+    ]
+  },
+  ram: {
+    label: "Memory (RAM)", icon: "🧩",
+    items: [
+      {name:"8GB DDR4",price:1600,ram:"DDR4"},
+      {name:"16GB DDR4 (2×8GB)",price:3200,ram:"DDR4"},
+      {name:"32GB DDR4 (2×16GB)",price:6200,ram:"DDR4"},
+      {name:"16GB DDR5 (2×8GB)",price:4200,ram:"DDR5"},
+      {name:"32GB DDR5 (2×16GB)",price:7800,ram:"DDR5"}
+    ]
+  },
+  storage: {
+    label: "Storage (SSD)", icon: "💾",
+    items: [
+      {name:"500GB NVMe SSD",price:2800},
+      {name:"1TB NVMe SSD",price:4800},
+      {name:"2TB NVMe SSD",price:8500}
+    ]
+  },
+  psu: {
+    label: "Power Supply (PSU)", icon: "⚡",
+    items: [
+      {name:"450W power supply",price:2800,watts:450},
+      {name:"550W power supply",price:3800,watts:550},
+      {name:"650W power supply",price:5200,watts:650},
+      {name:"750W power supply",price:7200,watts:750},
+      {name:"850W power supply",price:9500,watts:850}
+    ]
+  }
+};
+
+const keys = Object.keys(catalog);
+const partsEl = document.getElementById("parts");
+
+function money(n) {
+  return "₹" + Math.round(n).toLocaleString("en-IN");
+}
+
+function renderParts() {
+  partsEl.innerHTML = keys.map(key => {
+    const group = catalog[key];
+    return `
+      <div class="part">
+        <div class="emoji">${group.icon}</div>
+        <h3>${group.label}</h3>
+        <select id="${key}" aria-label="${group.label}">
+          ${group.items.map((item,i) =>
+            `<option value="${i}">${item.name} — ${money(item.price)}</option>`
+          ).join("")}
+        </select>
+        <div class="price" id="${key}Price"></div>
+      </div>`;
+  }).join("");
+
+  keys.forEach(key =>
+    document.getElementById(key).addEventListener("change", update)
+  );
+  update();
+}
+
+function selected(key) {
+  return catalog[key].items[
+    Number(document.getElementById(key).value)
+  ];
+}
+
+function totalCost() {
+  return keys.reduce((sum,key) => sum + selected(key).price, 0);
+}
+
+function update() {
+  const total = totalCost();
+  const budget = Math.max(0, Number(document.getElementById("budget").value) || 0);
+  const name = document.getElementById("buildName").value.trim() || "Your Dream PC";
+  const purpose = document.getElementById("purpose").value;
+
+  keys.forEach(key => {
+    document.getElementById(key + "Price").textContent =
+      money(selected(key).price);
+  });
+
+  document.getElementById("total").textContent = money(total);
+  document.getElementById("budgetText").textContent = money(budget);
+  document.getElementById("remaining").textContent = money(budget-total);
+  document.getElementById("remaining").style.color =
+    total > budget ? "#ff9a9a" : "#00e5a0";
+  document.getElementById("partCount").textContent =
+    keys.length + " / " + keys.length;
+  document.getElementById("previewName").textContent = name;
+  document.getElementById("previewPurpose").textContent = purpose + " setup";
+
+  document.getElementById("budgetMessage").textContent =
+    total > budget
+      ? "⚠️ You are " + money(total-budget) + " over budget. Consider changing components."
+      : "✓ Your selected components are within your budget by " + money(budget-total) + ".";
+
+  document.getElementById("summary").innerHTML = keys.map(key => `
+    <div class="summary-row">
+      <span>${catalog[key].label}</span>
+      <span>${selected(key).name}<br><b>${money(selected(key).price)}</b></span>
+    </div>
+  `).join("");
+
+  const cpu = selected("cpu");
+  const board = selected("motherboard");
+  const ram = selected("ram");
+  const gpu = selected("gpu");
+  const psu = selected("psu");
+  const warnings = [];
+
+  if (cpu.socket !== board.socket) {
+    warnings.push("CPU socket mismatch: selected processor and motherboard use different sockets.");
+  }
+  if (ram.ram !== board.ram) {
+    warnings.push("RAM type mismatch: selected memory and motherboard specify different RAM generations.");
+  }
+  if (gpu.price > 0 && psu.watts < 650) {
+    warnings.push("Check GPU power requirements: this simulator flags PSUs below 650W for a separate GPU. Actual requirements vary by model.");
+  }
+
+  document.getElementById("compatibility").innerHTML = warnings.length
+    ? '<div class="warning"><b>Compatibility checks</b><br>' +
+      warnings.map(w => "⚠ " + w).join("<br><br>") + '</div>'
+    : '<div class="notice">✓ No socket or RAM-type mismatch detected by these basic checks. This is not a complete compatibility guarantee.</div>';
+}
+
+function getBuild() {
+  const choices = {};
+  keys.forEach(key => choices[key] = Number(document.getElementById(key).value));
+  return {
+    name: document.getElementById("buildName").value,
+    purpose: document.getElementById("purpose").value,
+    budget: document.getElementById("budget").value,
+    choices,
+    total: totalCost()
+  };
+}
+
+function applyBuild(build) {
+  if (!build || !build.choices) throw new Error("Invalid build");
+  keys.forEach(key => {
+    const index = Number(build.choices[key]);
+    if (!Number.isInteger(index) || !catalog[key].items[index]) {
+      throw new Error("Invalid component selection");
+    }
+  });
+  keys.forEach(key => document.getElementById(key).value = build.choices[key]);
+  document.getElementById("buildName").value = build.name || "";
+  document.getElementById("purpose").value = build.purpose || "Gaming";
+  document.getElementById("budget").value = build.budget || 100000;
+  update();
+}
+
+function saveBuild() {
+  try {
+    localStorage.setItem("pcForgeBuild", JSON.stringify(getBuild()));
+    document.getElementById("saveStatus").textContent =
+      "✓ Build saved in this browser.";
+    showSaved();
+  } catch (e) {
+    document.getElementById("saveStatus").textContent =
+      "Could not save. Your browser may block local storage.";
+  }
+}
+
+function showSaved() {
+  try {
+    const raw = localStorage.getItem("pcForgeBuild");
+    const saved = raw ? JSON.parse(raw) : null;
+    document.getElementById("savedBuild").textContent = saved
+      ? (saved.name || "My PC") + " — " + money(saved.total) + " (" + (saved.purpose || "Gaming") + ")"
+      : "No saved build yet.";
+  } catch (e) {
+    document.getElementById("savedBuild").textContent = "No readable saved build.";
+  }
+}
+
+function loadBuild() {
+  try {
+    const raw = localStorage.getItem("pcForgeBuild");
+    if (!raw) {
+      document.getElementById("saveStatus").textContent = "No saved build found.";
+      return;
+    }
+    applyBuild(JSON.parse(raw));
+    document.getElementById("saveStatus").textContent = "✓ Saved build loaded.";
+  } catch (e) {
+    document.getElementById("saveStatus").textContent = "Could not load this saved build.";
+  }
+}
+
+function deleteSaved() {
+  localStorage.removeItem("pcForgeBuild");
+  showSaved();
+  document.getElementById("saveStatus").textContent = "Saved build deleted.";
+}
+
+function resetBuild() {
+  keys.forEach(key => document.getElementById(key).selectedIndex = 0);
+  document.getElementById("buildName").value = "";
+  document.getElementById("purpose").value = "Gaming";
+  document.getElementById("budget").value = 100000;
+  update();
+  document.getElementById("saveStatus").textContent = "Build reset.";
+}
+
+function exportBuild() {
+  const blob = new Blob(
+    [JSON.stringify(getBuild(), null, 2)],
+    {type:"application/json"}
+  );
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "pc-forge-build.json";
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+["buildName","purpose","budget"].forEach(id => {
+  document.getElementById(id).addEventListener("input", update);
+  document.getElementById(id).addEventListener("change", update);
+});
+
+renderParts();
+showSaved();
+</script>
+</body>
+</html>
